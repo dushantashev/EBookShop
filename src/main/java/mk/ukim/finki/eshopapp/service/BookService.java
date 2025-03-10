@@ -21,4 +21,9 @@ public interface BookService {
     void deleteById(Long id);
     void markBookAsTaken(Long id);
 
+    List<Book> searchBooksByNameAndAuthor(String name, String author);
+
+    List<Book> searchBooksByName(String name);
+
+    List<Book> searchBooksByAuthor(String author);
 }

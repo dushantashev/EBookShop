@@ -62,4 +62,21 @@ public class BookRestController {
             return ResponseEntity.ok(book);
         }
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam(required = false) String name,
+                                                  @RequestParam(required = false) String author) {
+
+        if (name != null && author != null) {
+            List<Book> books = bookService.searchBooksByNameAndAuthor(name, author);
+            return ResponseEntity.ok(books);
+        } else if (name != null) {
+            List<Book> books = bookService.searchBooksByName(name);
+            return ResponseEntity.ok(books);
+        } else if (author != null) {
+            List<Book> books = bookService.searchBooksByAuthor(author);
+            return ResponseEntity.ok(books);
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 }
